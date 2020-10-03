@@ -5,11 +5,39 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.content-block {
+    width: calc(100% - 350px);
+    height: calc(100vh - 50px);
+    float: left;
+    background-color: #383d47;
+}
+
+.header {
+    float: left;
+    display: table-cell;
+    width: calc(100% - 350px);
+    height: 50px;
+    background-color:#21252b;
+    text-align: center;
+}
+
+.header-search-input {
+    width: 30%;
+    line-height: 20px;
+    margin: 10px 0;
+    border: 1px solid #282C34;
+    border-radius: 0;
+    background-color: #333842;
+    color: #ffffff;
+    padding: 2px 5px;
+}
+
 .left-panel {
     width: 350px;
     height: 100vh;
     background-color: #282C34;
     color: #ffffff;
+    float: left;
 }
 
 .left-panel > hr {
@@ -18,7 +46,7 @@
 
 .menu-list-item {
     display: block;
-    padding-left: 30px;
+    padding-left: 15px;
     padding-top: 1%;
     padding-bottom: 1%;
     text-decoration: none;

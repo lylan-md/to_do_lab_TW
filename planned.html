@@ -2,35 +2,99 @@
 <html>
     <head>
         <title>To Do</title>
-        <link rel="icon" type="image/png" href="./favicon.png">
-        <link rel="stylesheet" href="./style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="img/favicon.png">
+        <link rel="stylesheet" href="style/style.css">
+        <link rel="stylesheet" href="style/pure-min.css">
+        <link rel="stylesheet" href="style/grids-responsive-min.css">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script type="text/javascript" src="js/helpers/cookies.js"></script>
+        <script type="text/javascript" src="js/helpers/tasks.js"></script>
+        <script type="text/javascript" src="js/todo.js"></script>
     </head>
     <body>
-        <div class="left-panel">
-            <div class="left-panel-logo-block">
-                <a href="./index.html"><img src="./favicon.png" alt="Logo"></a>
-                <h1>To Do</h1>
+        <div class="left-panel pure-u-sm-8-24 pure-u-md-6-24 pure-u-xl-4-24" id="left-panel">
+            <div class="left-panel-logo-block elem-left-panel pure-u-1-1">
+                <a href="./index.html" style="float: left;"><img src="img/favicon.png" alt="Logo" style="width: 40px;"></a>
+                <h1 style="float: left; margin: 0 0 0 5px; padding-top: 6px;">To Do</h1>
+                <span class="material-icons" id="button-close-left-panel" onclick="closePanel(this)">menu_open</span>
             </div>
-            <ul>
+            <ul class="elem-left-panel pure-u-1-1">
                 <a class="menu-list-item" href="./my_day.html"><span class="material-icons">wb_sunny</span>My Day</a>
                 <a class="menu-list-item" href="./important.html"><span class="material-icons">label_important</span>Important</a>
                 <a class="menu-list-item selected" href="./planned.html"><span class="material-icons">calendar_today</span>Planned</a>
                 <a class="menu-list-item" href="./tasks.html"><span class="material-icons">home</span>Tasks</a>
             </ul>
-            <hr>
-            <a class="menu-list-item" href="#"><span class="material-icons">plus_one</span>Add custom list</a>
         </div>
-        <div class="header">
-            <input type="search" class="header-search-input" placeholder="Search"></input>
-        </div>
-        <div class="content-block">
-            <div class="content-block-header">
-                <h1><span class="material-icons">calendar_today</span>Planned</h1>
+        <div class="pure-u-1 pure-u-sm-16-24 pure-u-md-18-24 pure-u-xl-20-24" id="content-wrapper">
+            <div class="header pure-u-1-1" id="header">
+                <span class="material-icons" id="button-open-left-panel" onclick="openPanel(this)">menu</span>
+                <input type="search" class="header-search-input" placeholder="Search"></input>
             </div>
-            <hr>
-            <input type="text" class="content-block-add" placeholder="Add task">
+            <div class="pure-u-1-1" id="content-block">
+                <div class="content-block-header">
+                    <h1><span class="material-icons">calendar_today</span>Planned</h1>
+                </div>
+                <hr>
+                <input type="text" id="content-block-add" class="pure-u-19-24" onchange="handleInputTask()" placeholder="Add task">
+                <input type="date" id="content-block-date" class="pure-u-5-24" onchange="handleInputTask()">
+                <div class="content-block-list" id="task-list-block">
+                </div>
+                <template id="task-list-elem-template">
+                    <div class="content-block-list-item pure-u-1-1" style="vertical-align: middle;">
+                        <div class="pure-u-2-24 pure-u-md-1-24">
+                            <input type="checkbox" id="checkbox-is-done-{TASK_ID}" {CHECKED} class="checkbox-is-done" onclick="handleIsDoneCheckBox(this)">
+                        </div>
+                        <div class="pure-u-18-24 pure-u-md-21-24">
+                            <span id="task-desc-{TASK_ID}" style="text-decoration: {TEXT_DES_DECORATION}" data-category="{TASK_CATEGORY}">{TASK_DESCRIPTION}</span>
+                        </div>
+                        <div class="pure-u-3-24 pure-u-md-2-24" style="float: right;">
+                            <span class="material-icons favorite-icon-{FAVORITE_STATUS}" id="fav-i-{TASK_ID}" onclick="favoriteClick(this)">{FAVORITE_STATUS_ICON}</span>
+                            <span class="material-icons delete-task-icon" id="del-i-{TASK_ID}" onclick="handleDeleteIconPress(this.id)">delete_outline</span>
+                        </div>
+                        <div class="content-block-list-item-planned-date" style="display: {DISPLAY_PLANNED};">
+                            <span style="font-size: 80%; color: #8c8c8c;">Planned on: </span>
+                            <span style="font-size: 80%; color: #788cde;" id="planned-on-{TASK_ID}">{PLANNED_DATE}</span>
+                        </div>
+                    </div>
+                </template>
+            </div>
         </div>
     </body>
+    <script>
+        function handleInputTask()
+        {
+            var textInput = document.getElementById("content-block-add");
+            var dateInput = document.getElementById("content-block-date");
+            var taskDescription = textInput.value;
+            var datePlanned = dateInput.value;
+
+            if (taskDescription.length && datePlanned.length)
+            {
+                var task = {
+                    task_desc: taskDescription,
+                    is_done: false,
+                    category: categoryPage,
+                    important: false,
+                    planned_on: datePlanned
+                };
+
+                addTask(task);
+
+                textInput.value = "";
+                dateInput.value = "";
+
+                showTasks(getTasksThisPage());
+            }
+        }
+
+        function getTasksThisPage()
+        {
+            return getTask(categoryPage); 
+        }
+
+        var categoryPage = 2;
+        showTasks(getTasksThisPage());
+    </script>
 </html>

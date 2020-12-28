@@ -1,0 +1,262 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    width: 100%;
+    background-color: #383D47;
+}
+
+hr {
+    width: 100%;
+    margin: 10px auto;
+    border: 1px solid #282C34;
+}
+
+#content-block {
+    min-height: calc(100vh - 60px);
+    height: 100%;
+    float: left;
+    background-color: #383d47;
+    padding: 0 5%;
+}
+
+.content-block-header {
+    padding-top: 3vh;
+    color: #4aa079;
+}
+
+.content-block-list {
+    color: #4aa079;
+}
+
+.content-block-list-item {
+    min-height: 50px;
+    line-height: 150%;
+    margin: 5px 0;
+    border: 1px solid #272727;
+    border-radius: 5px;
+    background-color: #333842;
+}
+
+.content-block-list-item:hover {
+    background-color: #282C34;
+}
+
+.content-block-list-item-planned-date {
+    display: block;
+    position: relative;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 10px;
+    top: -5px;
+}
+
+.content-block-list-item:hover {
+    background-color: #282C34;
+}
+
+.checkbox-is-done {
+    margin: 5px auto;
+    display: block;
+}
+
+#content-block-add {
+    line-height: 30px;
+    margin-bottom: 30px;
+}
+
+#content-block-add:focus, #content-block-date:focus {
+    outline-color: #4aa079;
+}
+
+#content-block-date {
+    line-height: 28px;
+    float: right;
+}
+
+.header, .header-full {
+    float: left;
+    display: table-cell;
+    height: 60px;
+    background-color:#21252b;
+    text-align: center;
+}
+
+input {
+    border: 1px solid #282C34;
+    border-radius: 5px;
+    background-color: #333842;
+    color: #ffffff;
+    padding: 2px 5px;
+}
+
+button {
+    background-color: #4aa079;
+    border-radius: 0;
+    border: 1px solid #282C34;
+    padding: 5px;
+    margin: 5px;
+}
+
+.login-form {
+    margin: 3vh auto;
+    text-align: center;
+}
+
+.login-form > form > input {
+    margin-bottom: 10px;
+}
+
+.header-search-input {
+    line-height: 35px;
+    margin: 10px 0;    
+}
+
+.left-panel {
+    width: 0;
+    min-height: 100vh;
+    height: 100%;
+    background-color: #282C34;
+    color: #ffffff;
+    float: left;
+    z-index: 1;
+}
+
+.left-panel > hr {
+    margin: 2.5% 15px;
+}
+
+.left-panel-logo-block {
+    display: inline-block;
+    height: 60px;
+    padding-left: 20px;
+}
+
+.left-panel-logo-block > a > img {
+    height: 40px;
+    margin: 2px 0;
+}
+
+.left-panel-logo-block > h1 {
+    float: left;
+    margin: 0;
+    padding-top: 5px;
+}
+
+.menu-list-item {
+    display: block;
+    padding-left: 15px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-decoration: none;
+}
+
+.menu-list-item:link {
+    color: #ffffff;
+}
+
+.menu-list-item:visited {
+    color: #ffffff;
+}
+
+.menu-list-item:active {
+    color: #ffffff;
+}
+
+.menu-list-item:hover {
+    background-color: #4c525e;
+}
+
+.material-icons {
+    margin: auto 10px; 
+    vertical-align: middle;
+}
+
+.selected {
+    background-color: #4c525e;
+}
+
+.selected:link {
+    color: #4aa079;
+}
+
+.selected:visited {
+    color: #4aa079;
+}
+
+.favorite-icon-unchecked {
+    float: right;
+    color: #ffffff;
+}
+
+.favorite-icon-unchecked:hover {
+    color: #788cde;
+    cursor: pointer;
+}
+
+.favorite-icon-checked {
+    float: right;
+    color: #788cde;
+}
+
+.favorite-icon-checked:hover {
+    cursor: pointer;
+}
+
+.delete-task-icon {
+    color: #ffffff;
+    display: none;
+    float: right;
+}
+
+.delete-task-icon:hover {
+    color: #788cde;
+    cursor: pointer;
+}
+
+.content-block-list-item:hover > .delete-task-icon {
+    display: inline-block;
+}
+
+#button-close-left-panel, #button-open-left-panel {
+    margin: 0;
+    font-size: 250%; 
+    color: #4AA079;
+    line-height: 60px;
+    vertical-align: middle;
+}
+
+#button-close-left-panel {
+    float: right; 
+}
+
+#button-open-left-panel {
+    float: left; 
+    display: none;
+}
+
+#button-close-left-panel:hover, #button-open-left-panel:hover {
+    color: #788cde;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 35.5em) {
+    .left-panel {
+        display: absolute;
+    }
+
+    #button-open-left-panel {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 80em) {
+    .left-panel-logo-block > a > img {
+        height: 50px;
+        margin: 2px 0;
+    }
+}

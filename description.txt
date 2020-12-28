@@ -1,0 +1,38 @@
+object task(
+    "task_id"           => [int] 
+    "task_desc"         => [string]
+    "is_done"           => [bool]
+    "category"          => [int] //maybe null 
+    "important"         => [bool]
+    "planned_on"        => [datetime]
+)
+
+object customListTask(
+    "task_id"           => [int] 
+    "task_desc"         => [string]
+    "is_done"           => [bool]
+)
+
+object customTaskList (
+    "custom_list_id"    => [int] //maybe null
+    "custom_list_name"  => [string] //maybe null
+    "tasks"             => array of customListTask
+)
+
+enum task_category (
+    1 => "my_day",
+    2 => "planned",
+    3 => "tasks",
+    4 => "important"
+)
+
+js/helper/tasks.js
+
+addTask(task);
+getTasks(category);
+changeTask(task_id, task);
+
+addTaskToCustomTasksList(customTaskList, customListTask);
+getCustomTasksListById(id);
+createCustomTasksList(tasks_list_name);
+changeCustomListTask(customTaskList, task_id, customListTask);

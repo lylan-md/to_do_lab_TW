@@ -147,3 +147,23 @@ function favoriteClick(elem)
     updateTask(task);
     showTasks(getTasksThisPage());
 }
+
+function validateLogInForm()
+{
+    var email = document.getElementById("email-login").value;
+    var password = document.getElementById("password-login").value;
+    
+    if (!email.length)
+    {
+        alert("Email is empty!");
+        return false;
+    }
+
+    if (!password.length)
+    {
+        alert("Password is empty!");
+        return false;
+    }
+
+    return true;
+}

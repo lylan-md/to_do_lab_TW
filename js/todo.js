@@ -104,14 +104,32 @@ function handleIsDoneCheckBox(checkBox)
             important: document.getElementById("fav-i-" + taskId).classList.contains("favorite-icon-checked"),
             planned_on: plannedOn
         };
-    updateTask(task);
+
+    var email = undefined;
+    var emailSpan = document.getElementById("email-span");
+    
+    if (emailSpan)
+    {
+        email = emailSpan.innerText;
+    }
+
+    updateTask(task, email);
     showTasks(getTasksThisPage());
 }
 
 function handleDeleteIconPress(id)
 {
     var taskId = id.replace("del-i-", "");
-    deleteTask(taskId);
+
+    var email = undefined;
+    var emailSpan = document.getElementById("email-span");
+    
+    if (emailSpan)
+    {
+        email = emailSpan.innerText;
+    }
+
+    deleteTask(taskId, email);
     showTasks(getTasksThisPage());
 }
 
@@ -144,7 +162,16 @@ function favoriteClick(elem)
             important: favoriteChecked,
             planned_on: plannedOn
         };
-    updateTask(task);
+
+    var email = undefined;
+    var emailSpan = document.getElementById("email-span");
+    
+    if (emailSpan)
+    {
+        email = emailSpan.innerText;
+    }
+
+    updateTask(task, email);
     showTasks(getTasksThisPage());
 }
 

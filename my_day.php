@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,27 +18,13 @@
         <script type="text/javascript" src="js/todo.js"></script>
     </head>
     <body>
-        <div class="left-panel pure-u-sm-8-24 pure-u-md-6-24 pure-u-xl-4-24" id="left-panel">
-            <div class="left-panel-logo-block elem-left-panel pure-u-1-1">
-                <a href="./index.html" style="float: left;"><img src="img/favicon.png" alt="Logo" style="width: 40px;"></a>
-                <h1 style="float: left; margin: 0 0 0 5px; padding-top: 6px;">To Do</h1>
-                <span class="material-icons" id="button-close-left-panel" onclick="closePanel(this)">menu_open</span>
-            </div>
-            <ul class="elem-left-panel pure-u-1-1">
-                <a class="menu-list-item" href="./my_day.html"><span class="material-icons">wb_sunny</span>My Day</a>
-                <a class="menu-list-item" href="./important.html"><span class="material-icons">label_important</span>Important</a>
-                <a class="menu-list-item" href="./planned.html"><span class="material-icons">calendar_today</span>Planned</a>
-                <a class="menu-list-item selected" href="./tasks.html"><span class="material-icons">home</span>Tasks</a>
-            </ul>
-        </div>
+        <?php require_once(__DIR__ . "/left_panel.php"); ?>
         <div class="pure-u-1 pure-u-sm-16-24 pure-u-md-18-24 pure-u-xl-20-24" id="content-wrapper">
-            <div class="header pure-u-1-1" id="header">
-                <span class="material-icons" id="button-open-left-panel" onclick="openPanel(this)">menu</span>
-                <input type="search" class="header-search-input" placeholder="Search"></input>
-            </div>
+            <?php require_once(__DIR__ . "/header.php"); ?>
             <div class="pure-u-1-1" id="content-block">
                 <div class="content-block-header">
-                    <h1><span class="material-icons">home</span>Tasks</h1>
+                    <h1>My Day</h1>
+                    <h3 id="cur-date">Saturday, 3 October</h3>
                 </div>
                 <hr>
                 <input type="text" id="content-block-add" class="pure-u-1-1" onchange="handleInputTask(this, this.value)" placeholder="Add task">
@@ -74,7 +64,15 @@
                     planned_on: null
                 };
 
-                addTask(task);
+                var email = undefined;
+                var emailSpan = document.getElementById("email-span");
+                
+                if (emailSpan)
+                {
+                    email = emailSpan.innerText;
+                }
+
+                addTask(task, email);
                 showTasks(getTasksThisPage());
                 input.value = "";
             }
@@ -82,10 +80,21 @@
 
         function getTasksThisPage()
         {
-            return getTask(categoryPage); 
+            var email = undefined;
+            var emailSpan = document.getElementById("email-span");
+            
+            if (emailSpan)
+            {
+                email = emailSpan.innerText;
+            }
+             
+            return getTask(categoryPage, email); 
         }
 
-        var categoryPage = 3;
+        var categoryPage = 1;
+        var options = { weekday: 'long', day: 'numeric', month: 'long'};
+        document.getElementById("cur-date").innerHTML = new Intl.DateTimeFormat('en-US', options).format(new Date());
+        document.getElementById("menu-list-myday").classList.add("selected");
         showTasks(getTasksThisPage());
     </script>
 </html>

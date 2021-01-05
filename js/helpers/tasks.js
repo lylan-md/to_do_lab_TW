@@ -12,8 +12,9 @@ function addTask(task, email)
         }
         
         var requestData = "email=" + email + "&task_data=" + JSON.stringify(task);
-        xhttp.open("GET", "app/add_task.php?" + requestData, true);
-        xhttp.send();
+        xhttp.open("POST", "app/api.php", true);
+        xhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xhttp.send(requestData);
     }
     else
     {
@@ -68,7 +69,7 @@ function getTask(category, email)
         
         var requestData = "email=" + email + "&category=" + category;
 
-        xhttp.open("GET", "app/get_tasks.php?" + requestData, true);
+        xhttp.open("GET", "app/api.php?" + requestData, true);
         xhttp.send();
         return [];
     }
@@ -110,7 +111,7 @@ function getImportantTask(email)
         
         var requestData = "email=" + email + "&important=1";
 
-        xhttp.open("GET", "app/get_tasks.php?" + requestData, true);
+        xhttp.open("GET", "app/api.php?" + requestData, true);
         xhttp.send();
         return [];
     }
@@ -152,8 +153,9 @@ function deleteTask(taskId, email)
         
         var requestData = "email=" + email + "&task_id=" + taskId;
 
-        xhttp.open("GET", "app/delete_task.php?" + requestData, true);
-        xhttp.send();
+        xhttp.open("DELETE", "app/api.php", true);
+        xhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xhttp.send(requestData);
     }
     else
     {        
@@ -183,8 +185,9 @@ function updateTask(updatedTask, email)
         }
         
         var requestData = "email=" + email + "&task_data=" + JSON.stringify(updatedTask);
-        xhttp.open("GET", "app/update_task.php?" + requestData, true);
-        xhttp.send();
+        xhttp.open("PUT", "app/api.php", true);
+        xhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xhttp.send(requestData);
     }
     else
     {
